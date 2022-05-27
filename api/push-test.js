@@ -3,9 +3,9 @@ const Pusher = require("pusher");
 var message
 
 const pusher = new Pusher({
-    appId: "1413909",
-    key: "539e5ca64152a5073d79",
-    secret: "4a878cc1301d84bfb2a6",
+    appId: process.env.pusher_appId,
+    key: process.env.pusher_key,
+    secret: process.env.pusher_secret,
     cluster: "ap3",
     useTLS: true
 });

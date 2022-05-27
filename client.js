@@ -276,7 +276,7 @@ function notify(args) {
 function join(channel) {
 	
 	
-	var pusher = new Pusher('539e5ca64152a5073d79', {cluster: 'ap3'});
+	var pusher = new Pusher(process.env.pusher_key, {cluster: 'ap3'});
 	
 	var channel = pusher.subscribe('my-channel');
 	channel.bind(
@@ -465,10 +465,12 @@ function insertAtCursor(text) {
 }
 
 function send(data) {
+	var data2 = data
+	data2.nick = myNick
 	console.log('send start')
 	jQuery.ajax({//https://www.zhihu.com/question/58847553
 		method: 'GET',
-		url: `./api/send?data=${JSON.stringify(data)}`,
+		url: `./api/send?data=${JSON.stringify(data2)}`,
 		data: null
 	  })
 	console.log('send complete')

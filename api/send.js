@@ -1,9 +1,9 @@
 const Pusher = require("pusher");
 
 const pusher = new Pusher({
-    appId: "1413909",
-    key: "539e5ca64152a5073d79",
-    secret: "4a878cc1301d84bfb2a6",
+    appId: process.env.pusher_appId,
+    key: process.env.pusher_key,
+    secret: process.env.pusher_secret,
     cluster: "ap3",
     useTLS: true
 });
@@ -15,16 +15,19 @@ export default async function handler(request, response) {
         var dataObj = JSON.parse(data)
         if (dataObj != undefined){
             if ("cmd" in dataObj) {
-                if (dataObj.cmd == "chat") {
+                if (!("trip" in dataObj)){
+                    dataObj.trip = null
+                }
+                if (dataObj.cmd == "chat" && "nick" in dataObj) {
                     console.log("pushing:"+data)
                     pusher.trigger("my-channel", "meowChatMsg", {
                         channel: "onlychannel",
                         cmd: "chat",
                         level: 100,
-                        nick: "onlyuser",
+                        nick: dataObj.nick,
                         text: dataObj.text,
                         time: null,
-                        trip: null,
+                        trip: dataObj.trip,
                         uType: "user",
                         userid: null
                     });

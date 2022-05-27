@@ -1,0 +1,1 @@
+this is a fork of hack.chat. it has very few functions and features, and is only for development. it can be deployed for free, with free vercel and pusher service.

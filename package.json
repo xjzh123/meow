@@ -1,0 +1,26 @@
+{
+  "name": "meow",
+  "version": "1.0.0",
+  "description": "no!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0",
+    "mysql2": "^2.3.3",
+    "pusher": "^5.1.0-beta",
+    "pusher-js": "^7.1.0-beta",
+    "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7",
+    "@vercel/node": "^1.15.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-register": "^6.26.0"
+  }
+}

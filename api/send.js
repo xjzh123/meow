@@ -32,6 +32,16 @@ export default async function handler(request, response) {
                         userid: null
                     });
                 }
+                else if (dataObj.cmd == "join") {
+                    console.log("pushing:"+data)
+                    pusher.trigger("my-channel", "meowChatMsg", {
+                        channel: "onlychannel",
+                        cmd: "info",
+                        text: `${dataObj.nick} joined`,
+                        time: null
+                    });
+                }
+                console.log('send finish')
             }
         }
     }

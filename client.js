@@ -9,6 +9,18 @@
 
 jQuery.noConflict();
 
+function getenv() {
+	var obj
+	obj = jQuery.ajax({//https://www.zhihu.com/question/58847553
+		method: 'GET',
+		url: `./api/env`,
+		async:false,
+		data: null,
+	})
+	var key = obj.responseText
+    return key;
+}
+
 
 // initialize markdown engine
 var markdownOptions = {
@@ -273,10 +285,10 @@ function notify(args) {
 	}
 }
 
-function join(channel) {
-	
-	
-	var pusher = new Pusher(process.env.pusher_key, {cluster: 'ap3'});
+function join(chat_channel) {
+	var pusher_key = getenv();
+
+	var pusher = new Pusher(pusher_key, {cluster: 'ap3'});
 	
 	var channel = pusher.subscribe('my-channel');
 	channel.bind(
@@ -308,8 +320,9 @@ function join(channel) {
 	}
 
 	if (myNick && shouldConnect) {
+		console.log('joining...')
 		localStorageSet('my-nick', myNick);
-		send({ cmd: 'join', channel: channel, nick: myNick });
+		send({ cmd: 'join', channel: chat_channel});
 	}
 
 	wasConnected = true;
@@ -467,12 +480,12 @@ function insertAtCursor(text) {
 function send(data) {
 	var data2 = data
 	data2.nick = myNick
-	console.log('send start')
+	console.log('send start:'+JSON.stringify(data2))
 	jQuery.ajax({//https://www.zhihu.com/question/58847553
 		method: 'GET',
 		url: `./api/send?data=${JSON.stringify(data2)}`,
 		data: null
-	  })
+	})
 	console.log('send complete')
 }
 
